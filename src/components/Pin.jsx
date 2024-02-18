@@ -13,7 +13,6 @@ const Pin = ({ pin }) => {
   const { postedBy, image, destination, _id, save } = pin;
 
   const [postHovered, setPostHovered] = useState(false);
-  const [savingPost, setSavingPost] = useState(false);
 
   const navigate = useNavigate();
   const userInfo = fetchUser();
@@ -30,7 +29,6 @@ const Pin = ({ pin }) => {
 
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
-      setSavingPost(true);
       //update document in Sanity
       client
         .patch(id)
@@ -48,7 +46,6 @@ const Pin = ({ pin }) => {
         .commit()
         .then(() => {
           window.location.reload();
-          setSavingPost(false);
         });
     }
   };
@@ -104,7 +101,7 @@ const Pin = ({ pin }) => {
                   type="button "
                   className="bg-red-500 text-white opacity-70 hover:opacity-100 font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
-                  {pin?.save?.length} {savingPost ? "Saving" : "Save"}
+                  {pin?.save?.length} "Save"
                 </button>
               )}
             </div>
