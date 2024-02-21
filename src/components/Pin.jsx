@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { client, urlFor } from "../client";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -66,7 +66,7 @@ const Pin = ({ pin }) => {
         <img
           src={urlFor(image).width(250).url()}
           alt="user"
-          className="rounded-lg w-full"
+          className="rounded-lg w-full h-[200px] object"
         />
         {postHovered && (
           <div
@@ -114,9 +114,9 @@ const Pin = ({ pin }) => {
                   className="bg-white flex items-center gap-2 text-black font-black p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                 >
                   <BsFillArrowUpRightCircleFill />
-                  {destination.length > 20
-                    ? destination.slice(8, 17)
-                    : destination.slice(8)}
+                  {destination.length > 15
+                    ? `${destination.slice(0, 15)} ...`
+                    : destination}
                 </a>
               )}
               {postedBy?._id === userInfo.id && (
