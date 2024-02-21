@@ -8,7 +8,7 @@ import MasonryLayout from "./MasonryLayout";
 import { pinDetailMorePinQuery, pinDetailQuery } from "../utils/data";
 import Spinner from "./Spinner";
 
-const PinDetail = () => {
+const PinDetail = ({ user }) => {
   const [pins, setPins] = useState(null);
   const [comment, setComment] = useState("");
   const [pinDetail, setPinDetail] = useState(null);
@@ -50,6 +50,32 @@ const PinDetail = () => {
   }, [pinId]);
 
   console.log(pinDetail);
+
+  const addComment = () => {
+    if (comment) {
+      setAddingComment(true);
+
+      client
+        .patch(pinId)
+        .setIfMissing({ comments: [] })
+        .insert("after", "comments[-1]", [
+          {
+            comment,
+            key: uuidv4(),
+            postedBy: {
+              _type: "postedBy",
+              _ref: user._id,
+            },
+          },
+        ])
+        .commit()
+        .then(() => {
+          fetchPinDetails();
+          setComment("");
+          setAddingComment(false);
+        });
+    }
+  };
 
   if (!pinDetail) return <Spinner message="Loading pin..." />;
 
@@ -121,6 +147,30 @@ const PinDetail = () => {
           ) : (
             <i>No comments</i>
           )}
+        </div>
+        {/* create comment */}
+        <div className="flex items-center flex-wrap mt-6 gap-3">
+          <Link to={`user-profile/${pinDetail?.postedBy?._id}`}>
+            <img
+              src={pinDetail?.postedBy?.image}
+              alt="user-profile"
+              className="w-10 h-10 rounded-full cursor-pointer"
+            />
+          </Link>
+          <input
+            type="text "
+            className="flex-1 border-2 border-gray-100 outline-none bottom-2 rounded-2xl focus:border-gray-300 p-3"
+            placeholder="Add a comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button
+            type="button"
+            className="bg-red-500 text-white rounded-full px-6 py-3 font-semibold text-base"
+            onClick={addComment}
+          >
+            {addingComment ? "Posting the comment" : "Post"}
+          </button>
         </div>
       </div>
     </div>
