@@ -70,10 +70,7 @@ export const categories = [
     name: "Travel",
     imageUrl: "https://source.unsplash.com/featured/?travel",
   },
-  {
-    name: "Architecture",
-    imageUrl: "https://source.unsplash.com/featured/?architecture",
-  },
+
   {
     name: "Art",
     imageUrl: "https://source.unsplash.com/featured/?art",
@@ -85,34 +82,6 @@ export const categories = [
   {
     name: "Fashion",
     imageUrl: "https://source.unsplash.com/featured/?fashion",
-  },
-  {
-    name: "Sports",
-    imageUrl: "https://source.unsplash.com/featured/?sports",
-  },
-  {
-    name: "Music",
-    imageUrl: "https://source.unsplash.com/featured/?music",
-  },
-  {
-    name: "Cars",
-    imageUrl: "https://source.unsplash.com/featured/?cars",
-  },
-  {
-    name: "Movies",
-    imageUrl: "https://source.unsplash.com/featured/?movies",
-  },
-  {
-    name: "Books",
-    imageUrl: "https://source.unsplash.com/featured/?books",
-  },
-  {
-    name: "Fitness",
-    imageUrl: "https://source.unsplash.com/featured/?fitness",
-  },
-  {
-    name: "Education",
-    imageUrl: "https://source.unsplash.com/featured/?education",
   },
 ];
 
