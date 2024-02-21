@@ -38,8 +38,6 @@ const PinDetail = ({ user }) => {
     fetchPinDetails();
   }, [pinId]);
 
-  console.log(pinDetail);
-
   const addComment = () => {
     if (comment) {
       setAddingComment(true);
@@ -67,6 +65,8 @@ const PinDetail = ({ user }) => {
   };
 
   if (!pinDetail) return <Spinner message="Loading pin..." />;
+
+  console.log(pinDetail);
 
   return (
     <>
@@ -105,7 +105,8 @@ const PinDetail = ({ user }) => {
           </div>
 
           <Link
-            to={`user-profile/${pinDetail?.postedBy?._id}`}
+            to={`/user-profile/${pinDetail?.postedBy?._id}`}
+            // to={`user-profile/${postedBy?._id}`}
             className="flex gap-2 mt-5 items-center bg-white rounded-lg"
           >
             <img
