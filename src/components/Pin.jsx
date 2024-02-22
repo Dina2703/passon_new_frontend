@@ -22,7 +22,7 @@ const Pin = ({ pin }) => {
 
   //check if pin has been already saved. The !! converts to boolean
   let alreadySaved = save?.filter(
-    (item) => item?.postedBy?._id === userInfo.id
+    (item) => item?.postedBy?._id === userInfo?.id
   );
 
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
@@ -36,10 +36,10 @@ const Pin = ({ pin }) => {
         .insert("after", "save[-1]", [
           {
             _key: uuidv4(),
-            userId: userInfo.id,
+            userId: userInfo?.id,
             postedBy: {
               _type: "postedBy",
-              _ref: userInfo.id,
+              _ref: userInfo?.id,
             },
           },
         ])
@@ -119,7 +119,7 @@ const Pin = ({ pin }) => {
                     : destination}
                 </a>
               )}
-              {postedBy?._id === userInfo.id && (
+              {postedBy?._id === userInfo?.id && (
                 <button
                   className="bg-white  opacity-70 hover:opacity-100 font-bold p-2 text-base rounded-3xl hover:shadow-md outline-none "
                   type="button"
